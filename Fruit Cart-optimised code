@@ -1,0 +1,46 @@
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class code3 {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver","D:\\Athithya\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		Thread.sleep(7000);
+		String[] Items = {"Tomato","Brinjal","Beetroot","Carrot","Beans","Pumpkin","Potato","Mushroom"};
+		addItems(driver,Items);
+	}
+		
+		
+		public static void addItems(WebDriver driver,String[] Items)
+		{
+		List<WebElement> ProdNames = driver.findElements(By.cssSelector("h4.product-name"));
+		for(int i=0;i<ProdNames.size();i++)
+		{
+			String[] ProdName1 = ProdNames.get(i).getText().split("-");
+			String FinalProdName = ProdName1[0].trim();
+			List p1 = Arrays.asList(Items);
+			int j=0;
+			if(p1.contains(FinalProdName))
+			{
+				driver.findElements(By.cssSelector("div.product-action")).get(i).click();
+				j++;
+			}
+			if(j==Items.length)
+			{
+				break;
+			}
+			
+		}
+		
+
+	}
+
+}
